@@ -7,7 +7,6 @@ class ChangeHandler {
   constructor(amountDue) {
     this.amountDue = amountDue;
     this.cashTendered = 0;
-   
   }
 
   /**
@@ -19,6 +18,8 @@ class ChangeHandler {
       this.cashTendered += 25;
     } else if (typeOfCoin === "dime") {
       this.cashTendered += 10;
+    } else if (typeOfCoin === "nickel") {
+      this.cashTendered += 5;
     } else if (typeOfCoin === "penny") {
       this.cashTendered += 1;
     }
@@ -34,31 +35,26 @@ class ChangeHandler {
       return false;
     }
   }
-  
+
   giveChange() {
-   let changeDue = {quarters:0, dimes:0, nickels:0, pennies:0} ,   
+    let changeDue = { quarters: 0, dimes: 0, nickels: 0, pennies: 0 };
     while (this.cashTendered > this.amountDue) {
-      if ((this.cashTendered - this.amountDue)>= 25) {
-        (this.cashTendered > this.amountDue)-= 25;
-        quarters++;
-      } else if ((this.cashTendered - this.amountDue)>= 10) {
-        (this.cashTendered > this.amountDue) -= 10;
-        dimes++;
-      } else if ((this.cashTendered - this.amountDue) >= 5) {
-        change -= 5;
-        nickels++;
+      if (this.cashTendered - this.amountDue >= 25) {
+        this.cashTendered -= 25;
+        changeDue.quarters++;
+      } else if (this.cashTendered - this.amountDue >= 10) {
+        this.cashTendered -= 10;
+        changeDue.dimes++;
+      } else if (this.cashTendered - this.amountDue >= 5) {
+        this.cashTendered -= 5;
+        changeDue.nickels++;
       } else {
-        ((this.cashTendered > this.amountDue) < 5);
-        pennies++;
+        this.cashTendered -= 1;
+        changeDue.pennies++;
       }
     }
     // TODO return the correct change in the following format...
-    return {
-      quarters: 0,
-      dimes: 0,
-      nickels: 0,
-      pennies: 0
-    };
+    return changeDue;
   }
 }
 

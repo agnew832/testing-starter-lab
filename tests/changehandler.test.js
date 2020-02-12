@@ -53,12 +53,12 @@ describe("isPaymentSufficient", function() {
 
 describe("giveChange", function() {
   test("32 change produces: quarters: 1, dimes: 0, nickels: 1, pennies: 2.", function() {
-    let test = new ChangeHandler();
+    let test = new ChangeHandler(0);
     test.insertCoin("quarter");
     test.insertCoin("nickel");
     test.insertCoin("penny");
     test.insertCoin("penny");
-    expect(test.giveChange()).toBe({
+    expect(test.giveChange()).toEqual({
       quarters: 1,
       dimes: 0,
       nickels: 1,
@@ -66,31 +66,30 @@ describe("giveChange", function() {
     });
   });
   test("10 change produces: quarters: 0, dimes: 1, nickels: 0, pennies: 0", function() {
-    let test = new ChangeHandler();
+    let test = new ChangeHandler(0);
     test.insertCoin("dime");
-
-    expect(test.giveChange()).toBe({
-      quarters: 0,
+    expect(test.giveChange()).toEqual({
       dimes: 1,
+      quarters: 0,
       nickels: 0,
       pennies: 0
     });
   });
   test("27 change produces: quarters: 1, dimes: 0, nickels: 0, pennies: 2", function() {
-    let test = new ChangeHandler(27);
+    let test = new ChangeHandler(0);
     test.insertCoin("quarter");
     test.insertCoin("penny");
     test.insertCoin("penny");
-    expect(test.giveChange()).toBe({
+    expect(test.giveChange()).toEqual({
       quarters: 1,
-      dimes: 0,
+      pennies: 2,
       nickels: 0,
-      pennies: 2
+      dimes: 0
     });
   });
 
   test("68 change produces: quarters: 2, dimes: 1, nickels: 1, pennies: 3", function() {
-    let test = new ChangeHandler(68);
+    let test = new ChangeHandler(0);
     test.insertCoin("quarter");
     test.insertCoin("quarter");
     test.insertCoin("dime");
@@ -98,7 +97,7 @@ describe("giveChange", function() {
     test.insertCoin("penny");
     test.insertCoin("penny");
     test.insertCoin("penny");
-    expect(test.giveChange()).toBe({
+    expect(test.giveChange()).toEqual({
       quarters: 2,
       dimes: 1,
       nickels: 1,

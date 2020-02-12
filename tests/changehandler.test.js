@@ -79,9 +79,6 @@ describe("giveChange", function() {
   test("27 change produces: quarters: 1, dimes: 0, nickels: 0, pennies: 2", function() {
     let test = new ChangeHandler(27);
     test.insertCoin("quarter");
-    test.insertCoin("quarter");
-    test.insertCoin("penny");
-    test.insertCoin("penny");
     test.insertCoin("penny");
     test.insertCoin("penny");
     expect(test.giveChange()).toBe({
